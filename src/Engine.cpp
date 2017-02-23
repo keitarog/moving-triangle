@@ -43,7 +43,7 @@ struct Polygon {
       data.push_back(0);
     }
     
-  	GLuint vbo;
+    GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), GL_STATIC_DRAW);
@@ -52,20 +52,20 @@ struct Polygon {
   }
 
   void Draw() {
-	  // draw a triangle
-	  glEnableVertexAttribArray(0);
-  	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-  	glVertexAttribPointer(
-    	0, // layout number - declared at vertex shader
-    	3, 
-    	GL_FLOAT,
-     	GL_FALSE,
-     	0, 
+    // draw a triangle
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+    glVertexAttribPointer(
+      0, // layout number - declared at vertex shader
+      3, // [X,Y,Z]
+      GL_FLOAT,
+      GL_FALSE,
+      0,
       (void*)0
-  	);
+    );
     
-	  glDrawArrays(GL_TRIANGLE_FAN, 0, num_vertices);
-	  glDisableVertexAttribArray(0);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, num_vertices);
+    glDisableVertexAttribArray(0);
   }
 };
 
@@ -96,9 +96,9 @@ void Engine::Init() {
 }
 
 void Engine::PrepareGL() {
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
+  GLuint VertexArrayID;
+  glGenVertexArrays(1, &VertexArrayID);
+  glBindVertexArray(VertexArrayID);
   
   long num_vertices = 3;
   float radius = 0.5;
@@ -135,15 +135,15 @@ void Engine::RenderGL(float frame_time) {
   float translation_speed = 0.25f;
   glm::vec3 offset(0.0f, 0.5f, 0.0f);
   offset = glm::rotateZ(offset, timer * glm::pi<float>() * translation_speed);
-   
+  
   // rotate first, then translate 
   glm::mat4 mvp = glm::translate(offset) * rotation;
   
   // apply model transform 
   glUniformMatrix4fv(state_->uniform_matrix, 1, GL_FALSE, glm::value_ptr(mvp));
- 
+
   // specify color 
-	glUniform4f(state_->uniform_color, 0, 1.0, 0, 1.0);
+  glUniform4f(state_->uniform_color, 0, 1.0, 0, 1.0);
 
   // draw a polygon  
   state_->polygon->Draw();
