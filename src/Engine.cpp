@@ -31,7 +31,7 @@ struct Polygon {
   
   void Transfer() {
     float r = radius;
-    float v = num_vertices;
+    long v = num_vertices;
     float m = 2.0f * glm::pi<float>() / v;
     
     std::vector<float> data;
