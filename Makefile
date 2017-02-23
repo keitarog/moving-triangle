@@ -8,10 +8,10 @@ SRCDIR=src
 OBJDIR=build
 
 CXX=clang++
-CXXFLAGS=-std=c++11 -I$(INCLUDE)
+CXXFLAGS=-std=c++11 -I$(INCLUDE) -O2
 
 CM=clang
-CMFLAGS=-fobjc-arc -I$(INCLUDE)
+CMFLAGS=-fobjc-arc -I$(INCLUDE) -O2
 
 SRCS=$(wildcard $(SRCDIR)/*.cpp $(SRCDIR)/*.m)
 OBJS=$(patsubst $(SRCDIR)/%.m,$(OBJDIR)/%.o,$(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS)))
